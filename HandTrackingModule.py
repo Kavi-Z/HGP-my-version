@@ -42,6 +42,8 @@ class handDetector():
                                                self.mpHands.HAND_CONNECTIONS)
 
         return img
+    
+
 
     def findPosition(self, img, handNo=0, draw=True):
         xList = []
