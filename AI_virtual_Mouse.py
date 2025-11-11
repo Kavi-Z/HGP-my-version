@@ -15,8 +15,7 @@ prev_scroll = 0
 pTime = 0
 plocX, plocY = 0, 0
 clocX, clocY = 0, 0
-
-# Try camera index 1 (common if you have multiple cameras); fall back to 0 if unavailable
+ 
 cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     cap.release()
