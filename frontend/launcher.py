@@ -31,7 +31,7 @@ class MouseLauncher(QWidget):
         if self.process is None:
             base_dir = os.path.dirname(os.path.abspath(__file__))
             python_executable = os.path.join(base_dir, "../venv/Scripts/python.exe")
-            ai_virtual_mouse_script = os.path.join(base_dir, "../AI_virtual_Mouse.py")
+            ai_virtual_mouse_script = os.path.join(base_dir, "../core/AI_virtual_Mouse.py")
 
             self.process = subprocess.Popen([python_executable, ai_virtual_mouse_script])
             self.label.setText("Gesture Mouse is running!")
