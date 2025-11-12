@@ -10,8 +10,7 @@ class DifficultyPage(QWidget):
         layout = QVBoxLayout()
         label = QLabel("Select Difficulty Level")
         layout.addWidget(label)
-
-        # Buttons for difficulty
+  
         beginner_btn = QPushButton("Beginner")
         beginner_btn.clicked.connect(lambda: self.navigate_callback("Beginner"))
         layout.addWidget(beginner_btn)
@@ -52,7 +51,7 @@ class GestureMousePage(QWidget):
     def run_gesture_mouse(self):
         if self.process is None:
         
-            self.process = subprocess.Popen(["python", "../AI_virtual_Mouse.py"])
+            self.process = subprocess.Popen(["python", "../core/AI_virtual_Mouse.py"])
             self.label.setText(f"Gesture Mouse running - {self.difficulty} Mode")
         else:
             self.label.setText("Gesture Mouse is already running!")
