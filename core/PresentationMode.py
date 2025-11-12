@@ -30,6 +30,9 @@ cap.set(4, hCam)
 detector = htm.handDetector(maxHands=1)
 wScr, hScr = autopy.screen.size()
 double_click_done = False 
+prev_x = 0
+slide_change_time = 0
+cooldown = 1.0
 # print(wScr, hScr)
 
 while True:
@@ -89,34 +92,33 @@ while True:
             cv2.FILLED)
             mouse.click('left')
             time.sleep(0.25) # add a small delay to prevent multiple clicks
+    if fingers == [0, 1, 1, 0, 0]:
+        pyautogui.press('right')
+        time.sleep(1.5)
+        cv2.putText(img, "→ Next Slide", (200, 100),
+            cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 3)
+               
 
-        #Right click
-    
-    #Drag drop
-     
-   
-    if fingers == [0, 0, 0, 0, 0]:
-        
-        pyautogui.mouseDown(button='left')   # single press for drag
-        dragging = True
-        cv2.putText(img, "Dragging...", (20, 100),
-        cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
-    elif fingers == [1, 1, 1, 1, 1]:  # All fingers up
-        mouse.release('left')  # Release the left mouse button
-        cv2.putText(img, "Released", (20, 100), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
-    #if fingers[0] == 1:
-       # cv2.putText(img, "Exiting Program", (20, 100), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
-       # time.sleep(1)  # Optional: Add a small delay for visual feedback
-       # break    
-    
-    if fingers[1] == 1 and fingers[2] == 1 :
-        scrollSpeed = np.interp(y1, (frameR, hCam - frameR), (-15, 15))
-        cv2.putText(img, "Scroll Mode", (20, 100), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+            # ✌️ Two fingers up → Previous Slide
+    elif fingers == [0, 1, 1, 1, 0]:
+        pyautogui.press('left')
+        time.sleep(1.5)
+        cv2.putText(img, "← Previous Slide", (150, 100),
+            cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
 
-    # Scroll only when middle mouse button is physically pressed
-   
-        pyautogui.scroll(-int(scrollSpeed))
-    # 11. Frame Rate
+
+    if len(lmList) > 4:  # make sure landmarks exist
+        thumb_tip_y = lmList[4][2]
+        thumb_base_y = lmList[3][2]
+
+    # Check if thumb pointing downward
+        if thumb_tip_y > thumb_base_y + 40:  # adjust threshold if needed
+            cv2.putText(img, "Thumbs Down - Exiting...", (20, 150),
+            cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
+            time.sleep(1)
+            break
+
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
@@ -131,6 +133,4 @@ while True:
         break
 
 cap.release()
-cv2.destroyAllWindows()
-
- 
+cv2.destroyAllWindows()            

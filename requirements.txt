@@ -1,5 +1,7 @@
-opencv-python
-mediapipe
-autopy
-numpy
-pyautogui
+PyQt5==5.15.9          # For the GUI in launcher.py
+opencv-python==4.8.0.76 # For computer vision tasks (e.g., capturing video frames)
+numpy==1.23.5          # For numerical operations (e.g., smooth mouse movement)
+autopy==4.0.1          # For controlling the mouse programmatically
+pyautogui==0.9.53      # For simulating mouse clicks and drags
+mouse==0.7.1           # For additional mouse control
+mediapipe==0.10.8      # For hand tracking and gesture recognition
