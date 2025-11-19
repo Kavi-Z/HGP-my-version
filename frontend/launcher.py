@@ -139,15 +139,19 @@ class MouseLauncher(QWidget):
             self.label.setText(f"⚙️ {mode_name} is already running or another mode is active!")
 
     def run_gesture_mouse(self):
+        self.stop_process()
         self.launch_mode("AI_virtual_Mouse.py", "Gesture Mode")
 
     def run_normal_mode(self):
+        self.stop_process()
         self.launch_mode("normal_mode.py", "Normal Mode")
 
     def run_presentation_mode(self):
+        self.stop_process()
         self.launch_mode("PresentationMode.py", "Presentation Mode")
 
     def run_gaming_mode(self):
+        self.stop_process()
         self.launch_mode("gamingMode.py", "Gaming Mode")
 
     def stop_process(self):
